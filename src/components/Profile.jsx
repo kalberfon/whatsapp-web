@@ -1,12 +1,12 @@
 import { AccountCircle, DataUsage, Message, MoreVert } from "@material-ui/icons";
 import Toolbar from "../styled-components/Toolbar";
 import BoxIcon from "../styled-components/BoxIcon";
-const Profile = ({ profileName }) => {
+const Profile = () => {
     return (
         <Toolbar>
             <header>
                 <BoxIcon style={{flexGrow: '1' }}>
-                    <AccountCircle className="account" /> {profileName}
+                    <AccountCircle className="account" />
                 </BoxIcon>
                 <BoxIcon>
                     <DataUsage/>

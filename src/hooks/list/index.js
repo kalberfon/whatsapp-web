@@ -1,12 +1,23 @@
 import { createContext, useContext, useReducer } from "react"
-import { reducers } from "./reducers"
+import { ACTION_TYPES, reducers } from "./reducers"
 
 
 const ListStateContext = createContext()
 const ListDispatchContext = createContext()
 
 const ListProvider = ({children}) => {
-    const [ state, dispatch ] = useReducer(reducers, {list: [], selectedItem: null})
+    const [ state, dispatch ] = useReducer(reducers, {list: [
+        {
+            name: "Grupo Geral",
+            subtitle: "",
+            channelId: "general-group"
+        },
+        {
+            name: "Grupo RH",
+            subtitle: "",
+            channelId: "rh-group"
+        },
+    ], selectedItem: null})
     console.log('ListProvider')
     return (
         <ListStateContext.Provider value={ state }>
@@ -24,7 +35,23 @@ const useDispatch = () => {
     }
     return dispatch
 }
+const useList = () => {
+    const context = useContext(ListStateContext)
+    if (!context) {
+        throw new Error("necessario o provider de Lista")
+    }
+    return context
+}
+const useItemSelected = () => {
+    const dispatch = useDispatch();
+
+    return {
+        onSelected: (selectedItem) => dispatch({type: ACTION_TYPES.SELECTED_ITEM, data: selectedItem})
+    }
+}
 export {
     ListProvider,
-    useDispatch
+    useDispatch,
+    useList,
+    useItemSelected
 }

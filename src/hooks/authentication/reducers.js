@@ -7,6 +7,7 @@ const ACTION_TYPES = {
 }
 
 const reducers = (state, action) => {
+    console.log(action);
     switch (action.type) {
         case ACTION_TYPES.SAVE_ME:
             return {

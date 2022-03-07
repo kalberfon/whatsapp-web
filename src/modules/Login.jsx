@@ -1,30 +1,20 @@
-import { useForm } from "react-hook-form";
+import FormLogin from "../components/FormLogin";
 import { useLogin } from "../hooks/authentication";
-import Modal from "../styled-components/Modal";
-
+import { BoxLeft, BoxRigth, BoxRoot } from "../styled-components/BoxRoot";
 
 const Login = () => {
-    const { register, handleSubmit, formState: {errors} } = useForm()
+  
     const { onLogin } = useLogin()
-    const onsubmit = (data) => onLogin(data)
+    const onSubmit = (data) => onLogin(data)
 
     return (
-        <Modal>
-            <form onSubmit={handleSubmit(onsubmit)}>
-                <input {...register("name", {required: true})} />
-      
-                <input {...register("email", { required: true ,  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Please enter a valid email',
-                }})} />
-                {errors.email?.message && (
-                    JSON.stringify(errors.email?.message)
-                )}
-                
-                <input type="submit" />
-
-            </form>
-        </Modal>
+        <BoxRoot>
+            <BoxLeft>
+            <FormLogin onSubmit={onSubmit}/>
+            </BoxLeft>
+            <BoxRigth>
+            </BoxRigth>
+        </BoxRoot>
     );
 }
 

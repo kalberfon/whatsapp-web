@@ -16,9 +16,11 @@ const BoxLeft = styled(({children, ...props}) => <div {...props}>{children}</div
 `
 
 const BoxRoot = styled(({children, ...props}) => (<div {...props}>{children}</div>) )`
-    width: auto;
-    margin: 23px 270px;
+    max-width: 1200px;
+    min-width: 945px;
+    margin: 0 auto;
     display: flex;
+    margin-top: 26px;
     height: calc(100vh - 52px);
     background-color: ${DefaultTheme.secondary};
     box-shadow: 0 6px 18px rgb(11 20 26 / 5%);

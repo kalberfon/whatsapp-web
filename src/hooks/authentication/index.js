@@ -1,6 +1,4 @@
 import { createContext, useContext, useReducer } from "react"
-import { useQuery } from "react-query";
-import { fetchMe } from "../../api/auth";
 import { ACTION_TYPES, reducers } from "./reducers";
 
 const AuthStateContext = createContext();
@@ -8,17 +6,10 @@ const AuthDispatchContext = createContext();
 
 const AuthenticationProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, {user: null, logged: false});
-    const { isLoading, isError : isUnauthorized } = useQuery('me', fetchMe, {
-        onSuccess: (data) => {
-            dispatch({type: ACTION_TYPES.SAVE_ME, data})
-        }, onError: (data) => {
-            // dispatch({type: ACTION_TYPES.LOGOUT})
-        }
-    })
+    const { logged } = state
 
-    console.log('auth provider')
     return (
-        <AuthStateContext.Provider value={{isLoading , isUnauthorized, ...state}}>
+        <AuthStateContext.Provider value={{logged, ...state}}>
             <AuthDispatchContext.Provider value={dispatch}>
                 {children}
             </AuthDispatchContext.Provider>
